@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-// import 'package:search_job_ui/util/job_card.dart';
+import 'package:search_job_ui/util/job_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,6 +58,19 @@ class _HomePageState extends State<HomePage> {
             height: 25,
           ),
           JobCardWidget(),
+          SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: Text(
+              'Recently Added',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 26,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -150,21 +163,26 @@ class SearchWidget extends StatelessWidget {
 }
 
 class JobCardWidget extends StatelessWidget {
-  const JobCardWidget({Key? key}) : super(key: key);
+  JobCardWidget({Key? key}) : super(key: key);
 
+  final List<List> jobsForYou = [
+    ['Uber', 'UI Designer', 'images/uber.png', 45],
+    ['Google', 'Product Dev', 'images/google.png', 80],
+    ['Apple', 'Software Eng.', 'images/apple.png', 75],
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      height: 160,
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: jobsForYou.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return JobCard(
-            compantName: 'Uber',
-            jobTitle: 'UI Designer',
-            logoImagePath: 'images/uber.png',
-            hourlyRate: 45,
+            compantName: jobsForYou[index][0],
+            jobTitle: jobsForYou[index][1],
+            logoImagePath: jobsForYou[index][2],
+            hourlyRate: jobsForYou[index][3],
           );
         },
       ),
