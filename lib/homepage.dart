@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:search_job_ui/util/job_card.dart';
+import 'package:search_job_ui/util/recent_job_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          RecentJobCardWidget(),
         ],
       ),
     );
@@ -168,7 +170,7 @@ class JobCardWidget extends StatelessWidget {
   final List<List> jobsForYou = [
     ['Uber', 'UI Designer', 'images/uber.png', 45],
     ['Google', 'Product Dev', 'images/google.png', 80],
-    ['Apple', 'Software Eng.', 'images/apple.png', 75],
+    ['Apple', 'Software Dev', 'images/apple.png', 75],
   ];
   @override
   Widget build(BuildContext context) {
@@ -185,6 +187,36 @@ class JobCardWidget extends StatelessWidget {
             hourlyRate: jobsForYou[index][3],
           );
         },
+      ),
+    );
+  }
+}
+
+class RecentJobCardWidget extends StatelessWidget {
+  RecentJobCardWidget({Key? key}) : super(key: key);
+
+  final List<List> recentJobs = [
+    ['Nike', 'Web Designer', 'images/nike.png', 20],
+    ['Google', 'Product Dev', 'images/google.png', 80],
+    ['Apple', 'Software Dev', 'images/apple.png', 75],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: ListView.builder(
+          itemCount: recentJobs.length,
+          itemBuilder: (context, index) {
+            return RecentJobCard(
+              compantName: recentJobs[index][0],
+              jobTitle: recentJobs[index][1],
+              logoImagePath: recentJobs[index][2],
+              hourlyRate: recentJobs[index][3],
+            );
+          },
+        ),
       ),
     );
   }
